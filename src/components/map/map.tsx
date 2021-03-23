@@ -26,8 +26,12 @@ const Map = (props: any) => {
     });
     map.addControl(new MapboxLanguage({ defaultLanguage: lang }));
     map.addControl(new mapboxgl.FullscreenControl());
+    
 
     map.on("load", function () {
+      new mapboxgl.Marker()
+.setLngLat([props.lat, props.lon])
+.addTo(map);
       map.addSource("countries", {
         type: "vector",
         url: "mapbox://mapbox.country-boundaries-v1",

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { State } from "../../redux/stateInterface";
 import Map from "../map/map";
 
+
 import "./../../Normalize.css";
 import "./country-description.scss";
 
@@ -33,10 +34,10 @@ function CountryDescription(props: any) {
           </div>
         </div>
         <div className="map-info">
-          <h3>Top Things To Do</h3>
-          <h4 className="map-info-one">night life</h4>
-          <h4 className="map-info-two">hiking</h4>
-          <h4 className="map-info-three">cruises & water tours</h4>
+          <h3>{lang === 'en' ? 'Top Things To Do' : lang === 'ru' ? 'Лучшие развлечения' : 'Les meilleures choses à faire'}</h3>
+          <h4 className="map-info-one">{lang === 'en' ? 'night life' : lang === 'ru' ? 'ночная жизнь' : 'vie nocturne'}</h4>
+          <h4 className="map-info-two">{lang === 'en' ? 'hiking' : lang === 'ru' ? 'прогулки пешком' : 'randonnée'}</h4>
+          <h4 className="map-info-three">{lang === 'en' ? 'cruises & water tours' : lang === 'ru' ? 'круизы и водные туры' : 'croisières et circuits aquatiques'}</h4>
         </div>
       </div>
     </div>

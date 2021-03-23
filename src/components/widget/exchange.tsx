@@ -6,9 +6,22 @@ import { State } from "../../redux/stateInterface";
 import { ExchangeI } from "../../interfaces/Country";
 
 
-const apiKey = 'f58a5ca4c71e8b86894a2efc';
+const apiKey = '4c35b494485e3affe20481c1';
 function Usd(props: any) {
  const [ratesUSD, setRatesUSD] = useState<ExchangeI[]>([]);
+ const lang = useSelector((state: State) => state.lang.lang);
+
+ function translate(str:any) {
+  if (str === 'INR') {
+    return lang === 'en' ? 'INR' : lang === 'ru' ? 'Инд.Рупия' : 'INR';
+  }
+  if (str === 'EUR') {
+    return lang === 'en' ? 'EUR' : lang === 'ru' ? 'Евро' : 'EUR';
+  }
+  if (str === 'JPY') {
+    return lang === 'en' ? 'JPY' : lang === 'ru' ? 'Йена' : 'JPY';
+  }
+}
 
 useEffect(() => {
  axios.get(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`).then((response) => {
@@ -23,15 +36,28 @@ useEffect(() => {
 }, [setRatesUSD]);
 
 return (
- (ratesUSD.length !== 0) && (ratesUSD[0].rates !== undefined) ? <div className="exchange-usd curr">1 USD -&gt; {ratesUSD[0].rates[props.currency]} {props.currency}</div> : <Loader />
+ (ratesUSD.length !== 0) && (ratesUSD[0].rates !== undefined) ? <div className="exchange-usd curr">1 {lang === 'en' ? 'USD' : lang === 'ru' ? 'ДОЛ' : 'USD'} -&gt; {ratesUSD[0].rates[props.currency]} {translate(props.currency)}</div> : <Loader />
 )
 }
 
 function Eur(props:any) {
  const [ratesEUR, setRatesEUR] = useState<ExchangeI[]>([]);
 
+  function translate(str:any) {
+      if (str === 'INR') {
+        return lang === 'en' ? 'INR' : lang === 'ru' ? 'Инд.Рупия' : 'INR';
+      }
+      if (str === 'EUR') {
+        return lang === 'en' ? 'EUR' : lang === 'ru' ? 'Евро' : 'EUR';
+      }
+      if (str === 'JPY') {
+        return lang === 'en' ? 'JPY' : lang === 'ru' ? 'Йена' : 'JPY';
+      }
+  }
+
+ const lang = useSelector((state: State) => state.lang.lang);
     useEffect(() => {
-     axios.get(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/EUR`).then((response) => {
+     axios.get(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/BYN`).then((response) => {
        const dataEUR: any[] = [];
        if (response.data) {
            dataEUR.push({
@@ -42,7 +68,7 @@ function Eur(props:any) {
      });
    }, [setRatesEUR]);
 return (
- (ratesEUR.length !== 0) && (ratesEUR[0].rates !== undefined) ? <div className="exchange-eur curr">1 EUR -&gt; {ratesEUR[0].rates[props.currency]} {props.currency}</div> : <Loader />
+ (ratesEUR.length !== 0) && (ratesEUR[0].rates !== undefined) ? <div className="exchange-eur curr">1 {lang === 'en' ? 'BYN' : lang === 'ru' ? 'Бел.Рубль' : 'BYN'} -&gt; {ratesEUR[0].rates[props.currency]} {translate(props.currency)}</div> : <Loader />
 )
 }
 

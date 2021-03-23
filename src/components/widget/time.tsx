@@ -89,7 +89,7 @@ const timeZone:any = {
     'Tokyo': '6',
     'Rome': '-2',
     'Madrid': '-2',
-    'New_Delhi': '-2'
+    'New-Delhi': '-2'
 }
   useEffect(()=> {
    let today = new Date();
@@ -101,7 +101,7 @@ const timeZone:any = {
    day = today.getDate(),
    month = today.getMonth(),
    year = today.getFullYear();
-
+    
  setTimeout(()=> {
    setTime(`${hour}:${min < 10 ? '0'+min : min}:${sec < 10 ? '0'+sec : sec}`);
    setDay(`${showWeekDay(week, lang)}, ${showMonth(month, lang)} ${day}, ${year}`);
